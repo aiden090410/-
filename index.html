@@ -5,43 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚡ 데식 노래방 파트 가이드 ⚡</title>
     <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThuY39LmUU2A2CF2eOS1vuHuzaRYoR71j6BYEaZKTHmw&s=10">
     <style>
         body { background: #0b0c0e; color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 25px 16px; margin: 0; }
-
-        /* 힙한 네온 그라데이션 타이틀 */
         h1 { text-align: center; font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #ff007f, #fcc419); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px; letter-spacing: -0.5px; }
-
-        /* 깔끔한 검색창 */
         .search-box { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #22252a; background: #16191d; color: #fff; margin-bottom: 20px; box-sizing: border-box; font-size: 16px; outline: none; transition: all 0.2s; }
         .search-box:focus { border-color: #ff007f; box-shadow: 0 0 10px rgba(255, 0, 127, 0.2); }
-
-        /* 음원 앱 스타일 곡 리스트 버튼 */
         .btn { display: flex; align-items: center; width: 100%; padding: 12px; margin: 10px 0; background: #16191d; color: white; border: 1px solid #1f2328; border-radius: 14px; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn:active { transform: scale(0.98); background: #1f2328; }
-
-        /* 앨범 아트 고급화 */
         .album-art { width: 52px; height: 52px; border-radius: 10px; margin-right: 16px; object-fit: cover; background: #22252a; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-
-        /* 가사 카드창 디자인 (애니메이션 탑재) */
         .song-content { display: none; background: #121417; padding: 20px; border-radius: 16px; margin: -4px 0 15px 0; border: 1px solid #1f2328; border-top: none; box-shadow: inset 0 4px 10px rgba(0,0,0,0.3); animation: slideDown 0.25s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-
         .song-title-inner { font-size: 20px; font-weight: 700; margin: 0 0 15px 0; color: #fff; }
         .lyric-line { margin: 14px 0; font-size: 17px; line-height: 1.6; letter-spacing: 0.3px; }
 
-        /* 🎨 보정된 파트별 선명한 폰트 컬러 */
-        .jae { color: #FFF29E; text-shadow: 0 0 1px rgba(255,242,158,0.3); }      
-        .wonpil { color: #FFAA00; text-shadow: 0 0 1px rgba(255,170,0,0.3); }   
+        .jae { color: #FFF099; text-shadow: 0 0 1px rgba(255,242,158,0.3); }      
+        .wonpil { color: #FFB300; text-shadow: 0 0 1px rgba(255,170,0,0.3); }   
         .sungjin { color: #FF4D4D; text-shadow: 0 0 1px rgba(255,77,77,0.3); }  
-        .junhyeok { color: #FF80D5; text-shadow: 0 0 1px rgba(255,128,213,0.3); } 
-        .youngk { color: #32E676; text-shadow: 0 0 1px rgba(50,230,118,0.3); }   
-        .dowoon { color: #38B7FF; text-shadow: 0 0 1px rgba(56,183,255,0.3); }   
+        .junhyeok { color: #FF85D7; text-shadow: 0 0 1px rgba(255,128,213,0.3); } 
+        .youngk { color: #2EE674; text-shadow: 0 0 1px rgba(50,230,118,0.3); }   
+        .dowoon { color: #33B5FF; text-shadow: 0 0 1px rgba(56,183,255,0.3); }   
         .normal { color: #9ca3af; }
     </style>
 </head>
 <body>
     <h1>🎤 DAY6 파트 가이드</h1>
-    <input type="text" id="search" class="search-box" onkeyup="searchSong()" placeholder="🔍 노래 제목, 가사 검색...">
+    <input type="text" id="search" class="search-box" onkeyup="searchSong()" placeholder="🔍 노래 제목, 제목 검색...">
     <div id="lobby">
         <button class="btn song-btn" onclick="toggleSong('song_0')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw6VMy1doOCLmgymguwFgtVKYaxrM6Fypr8Eqe_4rDAA&s=10" class="album-art"> <span>Free하게</span></button>
         <div id="song_0" class="song-content">
@@ -5387,26 +5376,18 @@
         </div>
     </div>
     <script>
-        // 💡 [핵심] 다른 노래 누르면 열려있던 가사 다 닫아버리는 스마트 자바스크립트 함수
         function toggleSong(id) {
             var target = document.getElementById(id);
             var allContents = document.getElementsByClassName('song-content');
-
-            // 만약 내가 누른 게 이미 열려있었다면 닫기만 하고 종료
             if (target.style.display === "block") {
                 target.style.display = "none";
                 return;
             }
-
-            // 루프를 돌면서 '모든' 가사 창을 일단 다 숨겨버리기!
             for (var i = 0; i < allContents.length; i++) {
                 allContents[i].style.display = "none";
             }
-
-            // 내가 방금 클릭한 그 노래의 가사 창만 번쩍 띄우기!
             target.style.display = "block";
         }
-
         function searchSong() {
             var input = document.getElementById('search').value.toLowerCase();
             var btns = document.getElementsByClassName('song-btn');
